@@ -10,23 +10,17 @@ import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.fail;
 
-// Здравствуйте, у меня проблемы со звуком на убунте :(
-// Но я вас слышу
-// Я выбрал сайт ask ubuntu, похож на стак оверфлоу
-// Буквально на днях заработало расширение Кталон рекордер
-// Поставив плагин селениум, создав проект, скачав Хром Драйвер НУЖНОЙ ВЕРСИИ все заработало
-
 public class UntitledTestCase {
     private WebDriver driver;
     private String baseUrl;
     private boolean acceptNextAlert = true;
     private StringBuffer verificationErrors = new StringBuffer();
     JavascriptExecutor js;
-
     @Before
     public void setUp() throws Exception {
-        System.setProperty("webdriver.chrome.driver", "/home/pain/Downloads/asdf/chromedriver");
+        System.setProperty("webdriver.chrome.driver", "/home/pain/Desktop/libs/chromedriver_linux64/chromedriver");
         driver = new ChromeDriver();
+        driver.manage().window().maximize();
         baseUrl = "https://www.google.com/";
         driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
         js = (JavascriptExecutor) driver;
@@ -34,15 +28,13 @@ public class UntitledTestCase {
 
     @Test
     public void testUntitledTestCase() throws Exception {
-        driver.get("https://askubuntu.com/users/login?ssrc=head&returnurl=https%3a%2f%2faskubuntu.com%2f");
+        driver.get("https://askubuntu.com/users/login?ssrc=head&returnurl=https%3a%2f%2faskubuntu.com%2fquestions%2f53146%2fhow-do-i-get-add-apt-repository-to-work-through-a-proxy%2f102505");
+        driver.findElement(By.id("email")).click();
         driver.findElement(By.id("email")).clear();
         driver.findElement(By.id("email")).sendKeys("karim.valeev.i@yandex.com");
-        Thread.sleep(1000);
         driver.findElement(By.id("password")).click();
         driver.findElement(By.id("password")).clear();
-        Thread.sleep(1000);
         driver.findElement(By.id("password")).sendKeys("ask.ubuntu.1");
-        Thread.sleep(1000);
         driver.findElement(By.id("submit-button")).click();
     }
 
@@ -88,3 +80,4 @@ public class UntitledTestCase {
         }
     }
 }
+
