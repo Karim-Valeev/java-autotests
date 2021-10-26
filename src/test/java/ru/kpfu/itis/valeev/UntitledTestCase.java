@@ -28,7 +28,11 @@ public class UntitledTestCase {
 
     @Test
     public void testUntitledTestCase() throws Exception {
-        driver.get("https://askubuntu.com/users/login?ssrc=head&returnurl=https%3a%2f%2faskubuntu.com%2fquestions%2f53146%2fhow-do-i-get-add-apt-repository-to-work-through-a-proxy%2f102505");
+        openTestingPage();
+        login();
+    }
+
+    private void login() {
         driver.findElement(By.id("email")).click();
         driver.findElement(By.id("email")).clear();
         driver.findElement(By.id("email")).sendKeys("karim.valeev.i@yandex.com");
@@ -36,6 +40,10 @@ public class UntitledTestCase {
         driver.findElement(By.id("password")).clear();
         driver.findElement(By.id("password")).sendKeys("ask.ubuntu.1");
         driver.findElement(By.id("submit-button")).click();
+    }
+
+    private void openTestingPage() {
+        driver.get("https://askubuntu.com/users/login?ssrc=head&returnurl=https%3a%2f%2faskubuntu.com%2fquestions%2f53146%2fhow-do-i-get-add-apt-repository-to-work-through-a-proxy%2f102505");
     }
 
     @After
