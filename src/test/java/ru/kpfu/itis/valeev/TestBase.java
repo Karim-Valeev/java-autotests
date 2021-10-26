@@ -2,7 +2,6 @@ package ru.kpfu.itis.valeev;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Test;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -10,12 +9,13 @@ import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.fail;
 
-public class UntitledTestCase {
+public class TestBase {
     private WebDriver driver;
     private String baseUrl;
     private boolean acceptNextAlert = true;
     private StringBuffer verificationErrors = new StringBuffer();
     JavascriptExecutor js;
+
     @Before
     public void setUp() throws Exception {
         System.setProperty("webdriver.chrome.driver", "/home/pain/Desktop/libs/chromedriver_linux64/chromedriver");
@@ -26,13 +26,7 @@ public class UntitledTestCase {
         js = (JavascriptExecutor) driver;
     }
 
-    @Test
-    public void testUntitledTestCase() throws Exception {
-        openTestingPage();
-        login();
-    }
-
-    private void login() {
+    public void login() {
         driver.findElement(By.id("email")).click();
         driver.findElement(By.id("email")).clear();
         driver.findElement(By.id("email")).sendKeys("karim.valeev.i@yandex.com");
@@ -42,7 +36,7 @@ public class UntitledTestCase {
         driver.findElement(By.id("submit-button")).click();
     }
 
-    private void openTestingPage() {
+    public void openTestingPage() {
         driver.get("https://askubuntu.com/users/login?ssrc=head&returnurl=https%3a%2f%2faskubuntu.com%2fquestions%2f53146%2fhow-do-i-get-add-apt-repository-to-work-through-a-proxy%2f102505");
     }
 
@@ -87,5 +81,5 @@ public class UntitledTestCase {
             acceptNextAlert = true;
         }
     }
-}
 
+}
