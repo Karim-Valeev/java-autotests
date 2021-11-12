@@ -1,9 +1,19 @@
 package ru.kpfu.itis.valeev.helpers;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
 import ru.kpfu.itis.valeev.ApplicationManager;
+import ru.kpfu.itis.valeev.data.AccountData;
 import ru.kpfu.itis.valeev.data.ResearchGroupData;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.nio.file.Paths;
 
 public class ResearchGroupHelper extends HelperBase {
 
@@ -26,7 +36,34 @@ public class ResearchGroupHelper extends HelperBase {
         driver.findElement(By.id("btn_submit")).click();
     }
 
-    public ResearchGroupData getFirstGroupData(){
+    public ResearchGroupData getDataOfFirstGroup(){
+        JSONParser parser = new JSONParser();
+        try {
+            JSONObject jsonObject = (JSONObject) parser.parse(new FileReader("src/resources/groups.json"));
+
+            JSONArray jsonArray = (JSONArray) jsonObject.get("groups");
+
+            JSONObject researhGroupJson = (JSONObject) jsonArray.get(0);
+
+            ResearchGroupData researchGroupData = new ResearchGroupData(
+                    researhGroupJson.get("topic").toString(),
+                    researhGroupJson.get("description").toString(),
+                    researhGroupJson.get("project").toString(),
+                    researhGroupJson.get("words").toString()
+            );
+
+            return researchGroupData;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public ResearchGroupData getFirstGroupDataFromPage(){
         driver.findElement(By.className("project__item")).click();
         String topic = driver.findElement(By.className("publication__header--title")).getText();
         String description = driver.findElements(By.className("project__slide--item-name")).get(2).getText();

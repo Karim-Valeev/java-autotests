@@ -23,12 +23,7 @@ public class EditResearchGroupTestCase extends TestBaseForTeUenv {
 
         String id = applicationManager.getResearchGroup().getIdFromUrl(url);
 
-        ResearchGroupData toBeEditedResearchGroup = new ResearchGroupData(
-                "Тестовая т",
-                "Тестовое описание Тестовое описание",
-                "Без проекта",
-                "name"
-        );
+        ResearchGroupData toBeEditedResearchGroup = applicationManager.getResearchGroup().getDataOfFirstGroup();
 
         applicationManager.getNavigation().openEditReseargGroupPage(id);
 
@@ -38,10 +33,7 @@ public class EditResearchGroupTestCase extends TestBaseForTeUenv {
 
         applicationManager.getNavigation().openResearchGroupsPage();
 
-        ResearchGroupData editedResearchGroup = applicationManager.getResearchGroup().getFirstGroupData();
-
-        System.out.println(toBeEditedResearchGroup);
-        System.out.println(editedResearchGroup);
+        ResearchGroupData editedResearchGroup = applicationManager.getResearchGroup().getFirstGroupDataFromPage();
 
         Assert.assertEquals(toBeEditedResearchGroup, editedResearchGroup);
 

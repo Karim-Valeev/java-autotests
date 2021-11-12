@@ -19,14 +19,14 @@ public class CreateResearchGroupTestCase extends TestBaseForTeUenv {
 
         applicationManager.getNavigation().openCreateResearchGroupPage();
 
-        ResearchGroupData researchGroup = new ResearchGroupData("Тестовая тема 12345","Тестовое описание","Без проекта","name");
+        ResearchGroupData researchGroup = applicationManager.getResearchGroup().getDataOfFirstGroup();
 
         applicationManager.getResearchGroup().createResearchGroup(researchGroup);
 
 //        Не успевают классы верстки прогрузиться
         Thread.sleep(1000);
 
-        ResearchGroupData newResearchGroup = applicationManager.getResearchGroup().getFirstGroupData();
+        ResearchGroupData newResearchGroup = applicationManager.getResearchGroup().getFirstGroupDataFromPage();
 
         Assert.assertEquals(researchGroup, newResearchGroup);
 
